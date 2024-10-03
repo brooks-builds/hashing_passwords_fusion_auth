@@ -1,0 +1,11 @@
+FROM llama3.1:8b-instruct-fp16
+
+PARAMETER seed 12345
+
+# SYSTEM """
+# 	You are an ai that creates random letters, numbers, and special characters (for example a, b, c, 1, 2, 3, !, @, #, etc.). Write random letters up to but not past 255 characters.
+# """
+
+SYSTEM """
+	You are an ai creating a random list of produce for a grocery store shopping list. Create a list of random produce in 255 characters or less. This list should be one line without \n characters.
+"""
