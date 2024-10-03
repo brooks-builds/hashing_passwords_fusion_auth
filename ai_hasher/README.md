@@ -1,38 +1,25 @@
-## Example Password Hasher 
+# AI Hasher
 
-If you need to write a custom hasher (also known as a password encryptor) to import users into FusionAuth, you may use this example build. This is intended to be used with the Writing a Plugin guide provided in the FusionAuth documentation. 
+## Required to compile
 
-Writing a Plugin guide is found here:  https://fusionauth.io/docs/v1/tech/plugins/writing-a-plugin
+### Ollama
 
-### Example code
+You will need Ollama running locally on port 11434 to compile using maven.
 
-Any example password hashers provided in this repository is provided to assist in your deployment and management of FusionAuth.
- Use of this software is not covered under the FusionAuth license agreement and is provided "as is" without warranty. https://fusionauth.io/license
+You will also need to use the [Modelfile](../Modelfile) to create an LLM Model named 'hasher' using the command `ollama create hasher -f Modelfile`.
 
-More sample password hashers for various algorithms can be found in the [fusionauth-contrib](https://github.com/FusionAuth/fusionauth-contrib/tree/master/Password%20Hashing%20Plugins) repository.
+### Java 
 
-If there's a password hasher you'd like to see that isn't available, please [open a GitHub issue](https://github.com/fusionauth/fusionauth-issues/issues).
+Java version 17
 
-### Building
+You will need to update the tests for the hasher to work with the Modelfile since each one is based on your model and seed. In this project we have hardcoded them so don't use this in production...please.
 
-### Building with Maven
+## Compiling
 
+run `mvn clean compile package` to compile and create a jar file that includes all of the libaries needed to run the hasher.
 
-```bash
-$ mvn install
-```
+## Install into FusionAuth
 
+Follow the instructions at [FusionAuth](https://fusionauth.io/docs/extend/code/password-hashes/writing-a-plugin#install-the-plugin) to make the ai hasher available to FusionAuth.
 
-### Building with Savant
-
-**Note:** This project uses the Savant build tool. To compile using Savant, follow these instructions:
-
-```bash
-$ mkdir ~/savant
-$ cd ~/savant
-$ wget http://savant.inversoft.org/org/savantbuild/savant-core/1.0.0/savant-1.0.0.tar.gz
-$ tar xvfz savant-1.0.0.tar.gz
-$ ln -s ./savant-1.0.0 current
-$ export PATH=$PATH:~/savant/current/bin/
-```
-
+Bonus points if you show this to your security team and they cry.
